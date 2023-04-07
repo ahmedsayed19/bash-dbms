@@ -1,16 +1,4 @@
 
-. ./validation.sh
-# read -p "Enter the Database Name: " db
-
-# name $db
-# if [[ $? -eq 1 ]]; then
-#     echo "$db will be created!"
-# else
-#     echo "Invalid Name << valid names contains only alpha and nums and _ can't start with num >>"
-# fi
-
-
-
 if [[ -d bash_dbms ]]
 then
     cd bash_dbms
@@ -29,7 +17,7 @@ do
     Create_Database)
         read -p "Enter the Database Name: " db
 
-        if ../is_name_valid.sh $db && ../is_new_database.sh $db; then
+        if ../is_name_valid.sh $db && ../is_new_entry.sh $db; then
             mkdir $db
         fi
     ;;
@@ -41,11 +29,8 @@ do
         PS3="connect >"
         echo "c $PWD"
         select db in $(ls)
-        do
-            echo "1 $PWD"
-            
+        do            
             cd $db
-            echo "2 $PWD"
             ../../database_menu.sh $db
             cd ..
             PS3="bash bdms #?>"

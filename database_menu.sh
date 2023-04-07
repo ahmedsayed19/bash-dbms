@@ -6,29 +6,37 @@
         case $option in
         # Two case values are declared here for matching
         Create_Table)
-        echo "Create_Table"
+            echo "database menu $PWD" 
+            ../../table_menu.sh $1
         ;;
         List_Tables)
-        echo "List_Tables"
+            echo "Tables: "
+            ls
         ;;
         Drop_Table)
-        echo "Drop_Table"
+            PS3="remove table>"
+            select tb in $(ls)
+            do
+                rm $tb
+                PS3="$1 #?>"
+                break
+            done
         ;;
         Insert_into_Table)
-        echo "Insert_into_Table"
+            echo "Insert_into_Table"
         ;;
         Select_From_Table)
-        echo "Select_From_Table"
+            echo "Select_From_Table"
         ;;
         Delete_From_Table)
-        echo "Delete_From_Table"
+            echo "Delete_From_Table"
         ;;
         Update_Table)
-        echo "Update_Table"
+            echo "Update_Table"
         ;;
         Quite)
-            echo "$PWD Quite"
-        break
+            echo "Quite"
+            break
         ;;
         *)
         echo "Invalid Input."

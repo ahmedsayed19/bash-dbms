@@ -23,13 +23,26 @@
             done
         ;;
         Insert_into_Table)
-            echo "Insert_into_Table"
+            while true; do
+                read -p "table name: " tb
+                if ../../is_name_valid.sh $tb && [[ -e $tb ]]; then
+                    break
+                fi
+            done
+            ../../insert.sh $tb
         ;;
         Select_From_Table)
-            echo "Select_From_Table"
+            while true; do
+                read -p "table name: " tb
+                if ../../is_name_valid.sh $tb && [[ -e $tb ]]; then
+                    break
+                fi
+            done
+            echo " To select "
+            ../../select.sh $tb
         ;;
         Delete_From_Table)
-            echo "Delete_From_Table"
+            echo "Delete_From_Table sed '30,35d' input.txt > output.txt"
         ;;
         Update_Table)
             echo "Update_Table"

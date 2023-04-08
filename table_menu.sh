@@ -1,8 +1,10 @@
-read -p "Enter the table Name: " tb
-
-if ../../is_name_valid.sh $tb && ../../is_new_entry.sh $tb; then
-    touch $tb
-fi
+while true ; do
+    read -p "Enter the table Name: " tb
+    if ../../is_name_valid.sh $tb && ../../is_new_entry.sh $tb; then
+        break
+    fi
+done
+touch $tb
 
 
 
@@ -14,7 +16,7 @@ add_type() {
 
         case $type in
         str|int)
-            column+="-$type"
+            data_types+="$type "
             break
             ;;
         *)
@@ -24,7 +26,8 @@ add_type() {
     done
 }
 
-schema=()
+schema=""
+data_types=""
 while true; do
     finish=0
 
@@ -40,11 +43,11 @@ while true; do
                 fi
             done
             column="$field"
-            if [[ ${#schema[@]} -eq 0 ]]; then
-                column+="-pk"
-            fi
+            # if [[ ${#schema[@]} -eq 0 ]]; then
+            #     column+="-pk"
+            # fi
             add_type
-            schema+="$column,"
+            schema+="$column "
 
             break
             
@@ -66,7 +69,7 @@ done
 
 
 echo $schema > $tb 
-
+echo $data_types >> $tb 
 ############
 
 

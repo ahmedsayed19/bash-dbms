@@ -42,10 +42,22 @@
             ../../select.sh $tb
         ;;
         Delete_From_Table)
-            echo "Delete_From_Table sed '30,35d' input.txt > output.txt"
+            while true; do
+                read -p "table name: " tb
+                if ../../is_name_valid.sh $tb && [[ -e $tb ]]; then
+                    break
+                fi
+            done
+            ../../delete.sh $tb
         ;;
         Update_Table)
-            echo "Update_Table"
+            while true; do
+                read -p "table name: " tb
+                if ../../is_name_valid.sh $tb && [[ -e $tb ]]; then
+                    break
+                fi
+            done
+            ../../update.sh $tb
         ;;
         Quite)
             echo "Quite"
